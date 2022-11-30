@@ -8,15 +8,6 @@ import axios,* as others from 'axios';
 const Stack = createNativeStackNavigator();
 
 let accessToken = ""
-const getCurrentTrack = async (query:string) => {
-  let track;
-  try {
-    track = await axios.get(`https://api.spotify.com/v1/me/player/${query}`, {headers: {'Authorization': `Bearer ${accessToken}`,'Content-Type' : 'application/json'}});
-  } catch (error) {
-    console.log(error)
-  }
-  return (track.data)
-}
 export function Login() {
   const navigation : any = useNavigation();
 
@@ -63,15 +54,25 @@ export function Home() {
   const navigation : any = useNavigation();
   const [currentSong, setCurrentSong] = useState<any>();
   useEffect(()=> {
-    let currentTrack = getCurrentTrack("currently-playing")
-    console.log(currentTrack)
-    setCurrentSong(currentTrack)
+    
+    const getCurrentTrack = async () => {
+      let track;
+      try {
+        console.log("Current Track log :"+accessToken)
+        track = await axios.get(`https://api.spotify.com/v1/me/player/currently-playing`, {headers: {'Authorization': `Bearer ${accessToken}`,'Content-Type' : 'application/json'}});
+      } catch (error) {
+        console.log("Computer says no")
+      }
+      setCurrentSong(track.data)
+      console.log(track.data)
+    }
+    getCurrentTrack()
   },[])
+
   return (
     <View>
       <Button title="Login" onPress={() => navigation.navigate("Login")}/>
-      <Button title="Load current track" onPress={()=>getCurrentTrack("currently-playing")}/>
-
+      {!currentSong ? <Text>Computer says no</Text>:<Text>{currentSong?.item.name}</Text>}
     </View>
   )
 }
