@@ -50,7 +50,46 @@ export function Login() {
     </View>
   )
 }
-export function CurrentTrack() {
+
+export function GetTrackCard(trackUri:string) {
+  const [currentSong, setCurrentSong] = useState<any>();
+  const [currentArtist, setCurrentArtist] = useState<any>()
+  useEffect(()=> {
+    
+    const getTrack = async () => {
+      let track;
+      let artist;
+      try {
+        track = await axios.get(trackUri, {headers: {'Authorization': `Bearer ${accessToken}`,'Content-Type' : 'application/json'}});
+        artist = await axios.get(track.data.item.artists[0].href, {headers: {'Authorization': `Bearer ${accessToken}`,'Content-Type' : 'application/json'}});
+      } catch (error) {
+        console.log("Computer says no")
+      }
+      setCurrentSong(track.data)
+      setCurrentArtist(artist.data)
+      console.log(track.data)
+    }
+    setInterval(getTrack,5000)
+    return () => clearInterval(getTrack)
+  },[])
+
+  return (
+    <View>
+      {!currentSong || !currentArtist ?
+       <Text>Computer says no</Text>:
+       <View>
+          <Image style={styles.albumCover} source={{uri:currentSong.item.album.images[0].url}}/>
+          <Text>{currentSong?.item.name} – {currentSong?.item.artists[0].name}</Text>
+          <Text>
+            Artist's Genres: {currentArtist.genres.map(genre=><Text>{genre}{'\n'}</Text> )}
+          </Text>
+      </View>
+      }
+    </View>
+  )
+}
+
+export function CurrentTrackCard() {
   const [currentSong, setCurrentSong] = useState<any>();
   const [currentArtist, setCurrentArtist] = useState<any>()
   useEffect(()=> {
@@ -92,7 +131,7 @@ export function Home() {
   return (
     <View>
       <Button title="Login" onPress={() => navigation.navigate("Login")}/>
-      <CurrentTrack/>
+      <CurrentTrackCard/>
     </View>
   )
 }
