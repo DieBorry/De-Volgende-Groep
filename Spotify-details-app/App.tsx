@@ -119,7 +119,7 @@ export function CurrentTrackCard() {
           <Image style={styles.albumCover} source={{uri:currentSong.item.album.images[0].url}}/>
           <Text>{currentSong?.item.name} – {currentSong?.item.artists[0].name}</Text>
           <Text>
-            Artist's Genres: {currentArtist.genres.map(genre=><Text>{genre}{'\n'}</Text> )}
+            Artist's Genres: {currentArtist.genres.map((genre,index)=><Text key={index}>{genre}{'\n'}</Text> )}
           </Text>
       </View>
       }
@@ -133,6 +133,12 @@ export function Home() {
       <Button title="Login" onPress={() => navigation.navigate("Login")}/>
       <CurrentTrackCard/>
     </View>
+  )
+}
+export function Recent() {
+  const navigation : any = useNavigation();
+  return (
+    <View></View>
   )
 }
 
