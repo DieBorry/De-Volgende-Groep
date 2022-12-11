@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View, Image } from 'react-native';
+import { Button, StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
@@ -67,7 +67,6 @@ export function GetTrackCard(trackUri:string) {
       }
       setCurrentSong(track.data)
       setCurrentArtist(artist.data)
-      console.log(track.data)
     }
     setInterval(getTrack,5000)
     return () => clearInterval(getTrack)
@@ -105,7 +104,6 @@ export function CurrentTrackCard() {
       }
       setCurrentSong(track.data)
       setCurrentArtist(artist.data)
-      console.log(track.data)
     }
     setInterval(getCurrentTrack,5000)
     return () => clearInterval(getCurrentTrack)
@@ -131,14 +129,42 @@ export function Home() {
   return (
     <View>
       <Button title="Login" onPress={() => navigation.navigate("Login")}/>
+      <Button title="Recents" onPress={() => navigation.navigate("Recent")}/>
       <CurrentTrackCard/>
     </View>
   )
 }
 export function Recent() {
   const navigation : any = useNavigation();
+  const [trackList, setTrackList] = useState<any>() 
+  useEffect(()=>{
+      const getRecentList = async() => {
+      let recentList
+      try {
+        recentList = await axios.get(`https://api.spotify.com/v1/me/player/recently-played`, {headers: {'Authorization': `Bearer ${accessToken}`,'Content-Type' : 'application/json'}});
+      } catch (error) {
+        console.log("Computer says no")
+      }
+      setTrackList(recentList.data.items);
+
+    }
+    setInterval(getRecentList,5000)
+    return () => clearInterval(getRecentList)
+  },[])
   return (
-    <View></View>
+    <View>
+      <Button title="Home" onPress={() => navigation.navigate("Home")}/>
+      <ScrollView>
+      {!trackList? <Text>computer says no</Text>:
+      trackList.map((track,index) => (<View key={index}>
+          <Image style={styles.albumCover} source={{uri:track.track.album.images[0].url}}/>
+          <Text>{track?.track.name} – {track?.track.artists[0].name}</Text>
+          {/* <Text>
+            Artist's Genres: {currentArtist.genres.map((genre,index)=><Text key={index}>{genre}{'\n'}</Text> )}
+          </Text> */}
+      </View>))}
+      </ScrollView>
+    </View>
   )
 }
 
@@ -150,6 +176,7 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Recent" component={Recent}/>
         </Stack.Navigator>
       </NavigationContainer>
     );
