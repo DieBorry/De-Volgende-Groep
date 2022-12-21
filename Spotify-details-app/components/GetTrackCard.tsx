@@ -30,7 +30,7 @@ export function GetTrackCard(trackUri:string) {
     return (
       <View>
         {!currentSong || !currentArtist ?
-         <Text>Computer says no</Text>:
+         <Text>Loading . . .</Text>:
          <View>
             <Image style={styles.albumCover} source={{uri:currentSong.item.album.images[0].url}}/>
             <Text>{currentSong?.item.name} – {currentSong?.item.artists[0].name}</Text>

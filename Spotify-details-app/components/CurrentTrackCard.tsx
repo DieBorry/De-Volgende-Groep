@@ -24,14 +24,14 @@ export function CurrentTrackCard() {
         setCurrentSong(track.data)
         setCurrentArtist(artist.data)
       }
-      let cTrackInterval = setInterval(getCurrentTrack,5000)
+      let cTrackInterval = setInterval(getCurrentTrack,1500)
       return () => clearInterval(cTrackInterval)
     },[])
   
     return (
       <View>
         {!currentSong || !currentArtist ?
-         <Text>Computer says no</Text>:
+         <Text>Loading . . .</Text>:
          <View>
             <Image style={styles.albumCover} source={{uri:currentSong.item.album.images[0].url}}/>
             <Text>{currentSong?.item.name} – {currentSong?.item.artists[0].name}</Text>

@@ -17,7 +17,7 @@ export function Recent() {
           let accessToken = await AsyncStorage.getItem("accesToken")
           recentList = await axios.get(`https://api.spotify.com/v1/me/player/recently-played`, {headers: {'Authorization': `Bearer ${accessToken}`,'Content-Type' : 'application/json'}});
         } catch (error) {
-          console.log("Computer says no")
+          console.log(error)
         }
         setTrackList(recentList.data.items);
   
@@ -29,7 +29,7 @@ export function Recent() {
       <View>
         <Button title="Home" onPress={() => navigation.navigate("Home")}/>
         <ScrollView>
-        {!trackList? <Text>computer says no</Text>:
+        {!trackList? <Text>Loading . . .</Text>:
         trackList.map((track,index) => (<View key={index}>
             <Image style={styles.albumCover} source={{uri:track.track.album.images[0].url}}/>
             <Text>{track?.track.name} – {track?.track.artists[0].name}</Text>
