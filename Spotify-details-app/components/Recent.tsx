@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button, ScrollView, View, Image, Text } from "react-native";
+import { Button, ScrollView, View, Image, Text, ActivityIndicator } from "react-native";
 
 import styles from "./styles";
 
@@ -29,7 +29,7 @@ export function Recent() {
       <View>
         <Button title="Home" onPress={() => navigation.navigate("Home")}/>
         <ScrollView>
-        {!trackList? <Text>Loading . . .</Text>:
+        {!trackList? <ActivityIndicator size={"large"} color="#00ff00"/>:
         trackList.map((track,index) => (<View key={index}>
             <Image style={styles.albumCover} source={{uri:track.track.album.images[0].url}}/>
             <Text>{track?.track.name} – {track?.track.artists[0].name}</Text>
