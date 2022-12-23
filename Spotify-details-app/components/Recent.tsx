@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Button, ScrollView, View, Image, Text, ActivityIndicator } from "react-native";
 
 import styles from "./styles";
+import CurrentTrackCard from "./CurrentTrackCard";
 
 
 export function Recent() {
@@ -29,6 +30,7 @@ export function Recent() {
       <View>
         <Button title="Home" onPress={() => navigation.navigate("Home")}/>
         <ScrollView>
+          <CurrentTrackCard/>
         {!trackList? <ActivityIndicator size={"large"} color="#00ff00"/>:
         trackList.map((track,index) => (<View key={index}>
             <Image style={styles.albumCover} source={{uri:track.track.album.images[0].url}}/>

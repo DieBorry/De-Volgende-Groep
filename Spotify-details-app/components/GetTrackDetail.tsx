@@ -5,10 +5,11 @@ import {View, Image, Text, ActivityIndicator } from "react-native";
 
 import styles from "./styles";
 
-export function GetTrackCard(trackUri:string) {
+export default function GetTrackDetails(props) {
     const [currentSong, setCurrentSong] = useState<any>();
     const [currentArtist, setCurrentArtist] = useState<any>()
     const [songDetails, setSongDetails] = useState<any>();
+    
     useEffect(()=> {
       
       const getTrack = async () => {
@@ -17,35 +18,33 @@ export function GetTrackCard(trackUri:string) {
         let details;
         try {
           let accessToken = await AsyncStorage.getItem("accesToken")
-          track = await axios.get(trackUri, {headers: {'Authorization': `Bearer ${accessToken}`,'Content-Type' : 'application/json'}});
-          artist = await axios.get(track.data.item.artists[0].href, {headers: {'Authorization': `Bearer ${accessToken}`,'Content-Type' : 'application/json'}});
-          details = await axios.get(`https://api.spotify.com/v1/audio-analysis/${track.data.item.id}`,{headers: {'Authorization': `Bearer ${accessToken}`,'Content-Type' : 'application/json'}})
+          track = await axios.get(props.url, {headers: {'Authorization': `Bearer ${accessToken}`,'Content-Type' : 'application/json'}});
+          artist = await axios.get(track.data.artists[0].href, {headers: {'Authorization': `Bearer ${accessToken}`,'Content-Type' : 'application/json'}});
+          details = await axios.get(`https://api.spotify.com/v1/audio-analysis/${track.data.id}`,{headers: {'Authorization': `Bearer ${accessToken}`,'Content-Type' : 'application/json'}})
         } catch (error) {
-          console.log(error)
+          console.log(error.message)
         }
         setCurrentSong(track.data)
         setCurrentArtist(artist.data)
         setSongDetails(details.data)
       }
-      let getTrackInterval = setInterval(getTrack,5000)
+      let getTrackInterval = setInterval(getTrack,1500)
       return () => clearInterval(getTrackInterval)
     },[])
   
     return (
       <View>
-        {!currentSong || !currentArtist ?
+        {!currentSong || !currentArtist || !songDetails ?
          <ActivityIndicator size={"large"} color="#00ff00"/>:
          <View>
-            <Image style={styles.albumCover} source={{uri:currentSong.item.album.images[0].url}}/>
-            <Text>{currentSong?.item.name} – {currentSong?.item.artists[0].name}</Text>
+            <Image style={styles.albumCover} source={{uri:currentSong?.album.images[0].url}}/>
+            <Text>{currentSong?.name} – {currentSong?.artists[0].name}</Text>
             <Text>
-              Artist's Genres:{"\n"} {currentArtist.genres.map(genre=><Text>{genre}{'\n'}</Text> )}
+              Artist's Genres:{"\n"} {currentArtist?.genres.map((genre,index)=><Text key={index}>{genre}{'\n'}</Text> )}
             </Text>
             <Text>
-              BPM: {songDetails.track.tempo}  {"\n"}
-              Key: {songDetails.track.key} {"\n"}
-
-
+              BPM: {songDetails?.track.tempo}  {"\n"}
+              Key: {songDetails?.track.key} {"\n"}
             </Text>
         </View>
         }

@@ -1,9 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
 import { ResponseType, useAuthRequest } from "expo-auth-session";
 import { useEffect, useState } from "react";
-import { Button, ScrollView, View, Image, Text,StyleSheet } from "react-native";
+import { Button, View } from "react-native";
 
 import styles from "./styles";
 
@@ -12,7 +11,7 @@ export function Login() {
   
     const client_Id:string = "a2aab0598b1547f4b2f9fe66828e8ebc";
     const client_Secret:string = "d02846da1f8d4759be3cca85d186f9db";
-    const redirect_Uri:string = "exp://172.16.192.177:19000"
+    const redirect_Uri:string = "exp://192.168.0.211:19000"
   
     const discovery = {
       authorizationEndpoint : "https://accounts.spotify.com/authorize",

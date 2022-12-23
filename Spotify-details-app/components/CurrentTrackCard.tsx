@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import {View, Image, Text, ActivityIndicator, Pressable} from "react-native";
+import GetTrackDetails from "./GetTrackDetail";
 
 import styles from "./styles";
 
@@ -9,6 +10,7 @@ import styles from "./styles";
 export function CurrentTrackCard() {
     const [currentSong, setCurrentSong] = useState<any>();
     const [currentArtist, setCurrentArtist] = useState<any>()
+    const [showDetails, setShowDetails] = useState<boolean>(false)
     useEffect(()=> {
       
       const getCurrentTrack = async () => {
@@ -32,13 +34,19 @@ export function CurrentTrackCard() {
       <View>
         {!currentSong || !currentArtist ?
          <ActivityIndicator size={"large"} color="#00ff00"/>:
-         <Pressable>
-            <Image style={styles.albumCover} source={{uri:currentSong.item.album.images[0].url}}/>
+         <Pressable onPressIn={()=>setShowDetails(true)}>
+            {!showDetails? 
+            <View>
+            <Image style={styles.albumCover} source={{uri:currentSong?.item.album.images[0].url}}/>
             <Text>{currentSong?.item.name} – {currentSong?.item.artists[0].name}</Text>
-            <Text>Track's Spotify-ID: {currentSong.item.id}</Text>
+            <Text>Track's Spotify-ID: {currentSong?.item.id}</Text>
             <Text>
-              Artist's Genres: {currentArtist.genres.map((genre,index)=><Text key={index}>{genre}{'\n'}</Text> )}
+              Artist's Genres: {currentArtist?.genres.map((genre,index)=><Text key={index}>{genre}{'\n'}</Text> )}
             </Text>
+            </View>
+            :
+            <GetTrackDetails url={currentSong.item.href} />
+            }
         </Pressable>
         }
       </View>
