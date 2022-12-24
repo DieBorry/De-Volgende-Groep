@@ -31,18 +31,18 @@ export function CurrentTrackCard() {
     },[])
   
     return (
-      <View>
+      <View style={styles.container}>
         {!currentSong || !currentArtist ?
          <ActivityIndicator size={"large"} color="#00ff00"/>:
          <Pressable onPressIn={()=>setShowDetails(true)}>
             {!showDetails? 
-            <View>
-            <Image style={styles.albumCover} source={{uri:currentSong?.item.album.images[0].url}}/>
-            <Text>{currentSong?.item.name} – {currentSong?.item.artists[0].name}</Text>
-            <Text>Track's Spotify-ID: {currentSong?.item.id}</Text>
-            <Text>
-              Artist's Genres: {currentArtist?.genres.map((genre,index)=><Text key={index}>{genre}{'\n'}</Text> )}
-            </Text>
+            <View style={styles.details}>
+              <Image style={styles.albumCover} source={{uri:currentSong?.item.album.images[0].url}}/>
+              <Text style={styles.title}>{currentSong?.item.name} – {currentSong?.item.artists[0].name}</Text>
+              <Text>Track's Spotify-ID: {currentSong?.item.id}</Text>
+              <Text>
+                Artist's Genres: {currentArtist?.genres.map((genre,index)=><Text key={index}>{genre}{'\n'}</Text> )}
+              </Text>
             </View>
             :
             <GetTrackDetails url={currentSong.item.href} />

@@ -33,7 +33,7 @@ export function Recent() {
           <CurrentTrackCard/>
         {!trackList? <ActivityIndicator size={"large"} color="#00ff00"/>:
         trackList.map((track,index) => (<View key={index}>
-            <Image style={styles.albumCover} source={{uri:track.track.album.images[0].url}}/>
+            <Image style={{height: 80, width: 80}} source={{uri:track.track.album.images[0].url}}/>
             <Text>{track?.track.name} – {track?.track.artists[0].name}</Text>
             {/* <Text>
               Artist's Genres: {currentArtist.genres.map((genre,index)=><Text key={index}>{genre}{'\n'}</Text> )}
