@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Spotify-details-app",
-    "slug": "Spotify-details-app",
+    "slug": "spotify-details-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,10 +24,27 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "spotifyDetailsApp://"
+            }
+          ]
+        }
+      ],
+      "package": "com.bjellis.spotifydetailsapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f3f0ae5b-9035-4346-868b-058f624705ca"
+      }
+    },
+    "owner": "bjellis"
   }
 }

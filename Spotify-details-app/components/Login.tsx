@@ -1,8 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { ResponseType, useAuthRequest } from "expo-auth-session";
+import { makeRedirectUri, ResponseType, useAuthRequest } from "expo-auth-session";
 import { useEffect, useState } from "react";
 import { Button, View } from "react-native";
+import * as Network from 'expo-network'
 
 import styles from "./styles";
 
@@ -11,7 +12,11 @@ export function Login() {
   
     const client_Id:string = "a2aab0598b1547f4b2f9fe66828e8ebc";
     const client_Secret:string = "d02846da1f8d4759be3cca85d186f9db";
-    const redirect_Uri:string = "exp://192.168.0.211:19000"
+    const redirectUri = makeRedirectUri({
+      native: 'spotifyDetailsApp://auth',
+      useProxy: true
+    })
+    console.log(redirectUri)
   
     const discovery = {
       authorizationEndpoint : "https://accounts.spotify.com/authorize",
@@ -30,7 +35,7 @@ export function Login() {
         "streaming"
       ],
       usePKCE:false,
-      redirectUri:redirect_Uri
+      redirectUri:redirectUri
     },discovery);
   
     useEffect(() => {
