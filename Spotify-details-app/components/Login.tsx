@@ -13,7 +13,8 @@ export function Login() {
     const client_Id:string = "a2aab0598b1547f4b2f9fe66828e8ebc";
     const client_Secret:string = "d02846da1f8d4759be3cca85d186f9db";
     const redirectUri = makeRedirectUri({
-      scheme: "com.bjellis.spotifydetailsapp",
+      native: "com.bjellis.spotifydetailsapp://authentication",
+      useProxy: true,
     })
     console.log(redirectUri)
   
@@ -25,6 +26,7 @@ export function Login() {
       responseType:ResponseType.Token,
       clientId: client_Id,
       clientSecret:client_Secret,
+      
       scopes: [
         "user-read-currently-playing",
         "user-read-recently-played",
@@ -34,7 +36,8 @@ export function Login() {
         "streaming"
       ],
       usePKCE:false,
-      redirectUri:redirectUri
+      redirectUri:redirectUri,
+      
     },discovery);
   
     useEffect(() => {
@@ -45,7 +48,7 @@ export function Login() {
     }, [response])
     return (
       <View>
-      <Button title='Login' onPress={()=>{promtAsync()}}/>
+      <Button title='Login' onPress={()=>{promtAsync({useProxy:true})}}/>
       <Button title="Home" onPress={() => navigation.navigate("Home")}/>
       </View>
     )

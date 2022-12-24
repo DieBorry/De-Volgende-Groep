@@ -30,7 +30,7 @@
           "action": "VIEW",
           "data": [
             {
-              "scheme": "spotifyDetailsApp://"
+              "scheme": "com.bjellis.spotifydetailsapp"
             }
           ]
         }
