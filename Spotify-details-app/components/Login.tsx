@@ -13,8 +13,7 @@ export function Login() {
     const client_Id:string = "a2aab0598b1547f4b2f9fe66828e8ebc";
     const client_Secret:string = "d02846da1f8d4759be3cca85d186f9db";
     const redirectUri = makeRedirectUri({
-      native: 'spotifyDetailsApp://auth',
-      useProxy: true
+      scheme: "com.bjellis.spotifydetailsapp",
     })
     console.log(redirectUri)
   
