@@ -1,15 +1,23 @@
 import { Button, ScrollView, View, Image, Text,StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  // CurrentTrackCard styling
     container: {
-      flex: 1,
+      height: 350,
       backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+      alignItems: 'stretch',
+      justifyContent: 'flex-start',
     },
-    albumCover : {
-      height: 80,
-      width:80
+    albumCover: {
+      height: 200
+    },
+    details: {
+      height: 200,
+    },
+    title: {
+      backgroundColor: "#ffffff88",
+      position: "absolute",
+      top: 170
     }
 });
 
