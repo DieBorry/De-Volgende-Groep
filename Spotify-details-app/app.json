@@ -2,6 +2,7 @@
   "expo": {
     "name": "Spotify-details-app",
     "slug": "spotify-details-app",
+    "scheme":"com.bjellis.spotifydetailsapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

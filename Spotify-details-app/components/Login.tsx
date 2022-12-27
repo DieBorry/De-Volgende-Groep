@@ -16,7 +16,6 @@ export function Login() {
       native: "com.bjellis.spotifydetailsapp://authentication",
       useProxy: true,
     })
-    console.log(redirectUri)
   
     const discovery = {
       authorizationEndpoint : "https://accounts.spotify.com/authorize",
@@ -26,7 +25,6 @@ export function Login() {
       responseType:ResponseType.Token,
       clientId: client_Id,
       clientSecret:client_Secret,
-      
       scopes: [
         "user-read-currently-playing",
         "user-read-recently-played",
@@ -37,19 +35,38 @@ export function Login() {
       ],
       usePKCE:false,
       redirectUri:redirectUri,
-      
     },discovery);
-  
+    const[notified, setNotified] = useState<boolean>(false)
+    useEffect(()=>{
+      const checkForRefresh = async () => {
+        let lastAccessTokenAt;
+        console.log("checking")
+        try {
+          lastAccessTokenAt = await AsyncStorage.getItem("lastAccessTokenAt");
+          console.log(lastAccessTokenAt)
+        }
+        catch(error)
+        {console.log(error.message)}
+        console.log("checking")
+        if (parseInt(lastAccessTokenAt)<Date.now()&&!notified){
+          alert("login is about to expire or has expired")
+          setNotified(true);
+          console.log("should have alerted")
+        }
+      let alertInterval = setInterval(checkForRefresh, 10000)
+      return () => clearInterval(alertInterval)
+  }},[])
     useEffect(() => {
       if (response?.type === "success") {
         const{access_token} = response.params;
+        console.log(response);
         AsyncStorage.setItem("accesToken",access_token)
+        AsyncStorage.setItem("lastAccessTokenAt",response.authentication.expiresIn.toString())
       }
     }, [response])
     return (
       <View>
       <Button title='Login' onPress={()=>{promtAsync({useProxy:true})}}/>
-      <Button title="Home" onPress={() => navigation.navigate("Home")}/>
       </View>
     )
 }
