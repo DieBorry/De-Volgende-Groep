@@ -38,11 +38,11 @@ export default function GetTrackDetails(props) {
          <ActivityIndicator size={"large"} color="#00ff00"/>:
          <View>
             <Image style={styles.albumCover} source={{uri:currentSong?.album.images[0].url}}/>
-            <Text>{currentSong?.name} – {currentSong?.artists[0].name}</Text>
-            <Text>
+            <Text style={styles.title}>{currentSong?.name} – {currentSong?.artists[0].name}</Text>
+            <Text style={styles.text}>
               Artist's Genres:{"\n"} {currentArtist?.genres.map((genre,index)=><Text key={index}>{genre}{'\n'}</Text> )}
             </Text>
-            <Text>
+            <Text style={styles.text}>
               BPM: {songDetails?.track.tempo}  {"\n"}
               Key: {songDetails?.track.key} {"\n"}
             </Text>

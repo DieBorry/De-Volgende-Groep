@@ -8,7 +8,7 @@ import Login from "./Login";
 export function Home() {
     const navigation : any = useNavigation();
     return (
-      <View>
+      <View style={styles.background}>
         <Login/>
         <Button title="Recents" onPress={() => navigation.navigate("Recent")}/>
         <CurrentTrackCard/>

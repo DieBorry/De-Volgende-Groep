@@ -27,14 +27,14 @@ export function Recent() {
       return () => clearInterval(recentsInterval)
     },[])
     return (
-      <View>
+      <View style={styles.background}>
         <Button title="Home" onPress={() => navigation.navigate("Home")}/>
         <ScrollView>
           <CurrentTrackCard/>
         {!trackList? <ActivityIndicator size={"large"} color="#00ff00"/>:
         trackList.map((track,index) => (<View key={index}>
             <Image style={{height: 80, width: 80}} source={{uri:track.track.album.images[0].url}}/>
-            <Text>{track?.track.name} – {track?.track.artists[0].name}</Text>
+            <Text style={styles.text}>{track?.track.name} – {track?.track.artists[0].name}</Text>
             {/* <Text>
               Artist's Genres: {currentArtist.genres.map((genre,index)=><Text key={index}>{genre}{'\n'}</Text> )}
             </Text> */}
