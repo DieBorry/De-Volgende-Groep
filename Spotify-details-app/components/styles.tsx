@@ -26,6 +26,22 @@ const styles = StyleSheet.create({
       top: 170
     },
 
+    //Recent Page
+    card: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      marginTop: 5,
+      
+    },
+    cardText: {
+      color: '#fff',
+      textAlignVertical: 'center',
+      paddingLeft: 10,
+    },
+    wrapperCustom: {
+      marginTop: 5
+    },
+
     
 });
 

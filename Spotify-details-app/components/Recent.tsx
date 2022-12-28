@@ -2,9 +2,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button, ScrollView, View, Image, Text, ActivityIndicator } from "react-native";
+import { Button, ScrollView, View, Image, Text, ActivityIndicator, Pressable } from "react-native";
 
 import styles from "./styles";
+import {LinearGradient} from 'expo-linear-gradient';
+
 import CurrentTrackCard from "./CurrentTrackCard";
 
 
@@ -33,8 +35,19 @@ export function Recent() {
           <CurrentTrackCard/>
         {!trackList? <ActivityIndicator size={"large"} color="#00ff00"/>:
         trackList.map((track,index) => (<View key={index}>
-            <Image style={{height: 80, width: 80}} source={{uri:track.track.album.images[0].url}}/>
-            <Text style={styles.text}>{track?.track.name} – {track?.track.artists[0].name}</Text>
+          <Pressable style={({ pressed }) => [
+          {
+            backgroundColor: pressed
+              ? '#222'
+              : '#000'
+          },
+          styles.wrapperCustom
+        ]}>
+            <LinearGradient colors={['#888', '#ffffff55', '#000']} style={styles.card}>
+              <Image style={{height: 80, width: 80}} source={{uri:track.track.album.images[0].url}}/>
+              <Text style={styles.cardText}>{track?.track.name} – {track?.track.artists[0].name}</Text>
+            </LinearGradient>
+          </Pressable >
             {/* <Text>
               Artist's Genres: {currentArtist.genres.map((genre,index)=><Text key={index}>{genre}{'\n'}</Text> )}
             </Text> */}
