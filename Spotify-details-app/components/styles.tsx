@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   button: {
       width: '80%',
       marginLeft: '10%',
-      borderRadius: 200,
+      marginTop: 20
     },
   
   // CurrentTrackCard styling
@@ -25,20 +25,33 @@ const styles = StyleSheet.create({
     },
     text: {
       color: '#fff',
+      backgroundColor: '#ffffff20',
+      borderRadius: 20,
+      padding: 20,
+      minWidth: '45%',
+      maxWidth: '50%'
     },
     title: {
       backgroundColor: "#ffffff88",
       position: "absolute",
       top: 170,
+      paddingLeft: 10,
       textTransform: 'uppercase',
       lineHeight: 22
+    },
+
+    // Track Info
+    row: {
+      marginTop: 20,
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      textAlignVertical: 'center',
     },
     
     //Recent Page
     card: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      marginTop: 5,
     },
     cardText: {
       color: '#fff',
@@ -46,7 +59,7 @@ const styles = StyleSheet.create({
       paddingLeft: 10,
     },
     wrapperCustom: {
-      marginTop: 5
+      marginTop: 10
     },
 
     

@@ -41,10 +41,12 @@ export function CurrentTrackCard() {
             <View>
               <Image style={styles.albumCover} source={{uri:currentSong?.item.album.images[0].url}}/>
               <Text style={styles.title}>{currentSong?.item.name} – {currentSong?.item.artists[0].name}</Text>
-              <Text style={styles.text}>Track's Spotify-ID: {currentSong?.item.id}</Text>
-              <Text style={styles.text}>
-                Artist's Genres: {currentArtist?.genres.map((genre,index)=><Text key={index}>{genre}{'\n'}</Text> )}
-              </Text>
+              <View style={styles.row}>
+                <Text style={styles.text}>Track's Spotify-ID: {currentSong?.item.id}</Text>
+                <Text style={styles.text}>
+                  Artist's Genres:{"\n"}{currentArtist?.genres.map((genre,index)=><Text key={index}>{genre}{'\n'}</Text> )}
+                </Text>
+              </View>
               <AddCalendarEvent songName={currentSong?.item.name} artistName={currentSong?.item.artists[0].name} duration={currentSong?.item.duration_ms} />
             </View>
             :
