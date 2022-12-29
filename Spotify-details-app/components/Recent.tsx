@@ -31,7 +31,7 @@ export function Recent() {
       <View style={styles.background}>
         <ScrollView>
           <CurrentTrackCard/>
-        {!trackList? <ActivityIndicator size={"large"} color="#00ff00"/>:
+        {!trackList? <ActivityIndicator size={"large"} color="#1db954"/>:
         trackList.map((track,index) => (<View key={index}>
           <Pressable style={({ pressed }) => [
           {

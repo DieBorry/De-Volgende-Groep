@@ -35,7 +35,7 @@ export default function GetTrackDetails(props) {
     return (
       <View>
         {!currentSong || !currentArtist || !songDetails ?
-         <ActivityIndicator size={"large"} color="#00ff00"/>:
+         <ActivityIndicator size={"large"} color="#1db954"/>:
          <View>
             <Image style={styles.albumCover} source={{uri:currentSong?.album.images[0].url}}/>
             <Text style={styles.title}>{currentSong?.name} – {currentSong?.artists[0].name}</Text>

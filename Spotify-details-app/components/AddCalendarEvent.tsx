@@ -41,7 +41,13 @@ export default function AddCalendarEvent(props) {
     };
   
     return (
-      <Button title="Add to Calendar" onPress={createEvent} />
+      <View style={styles.button}>
+      <Button 
+      color="#1db954"
+      title="Add to Calendar" 
+      onPress={createEvent} 
+      />
+      </View>
     );
   }
 async function createCalendar() {

@@ -7,6 +7,13 @@ const styles = StyleSheet.create({
       backgroundColor: '#000',
       height: '100%',
     },
+
+  // Buttons 
+  button: {
+      width: '80%',
+      marginLeft: '10%',
+      borderRadius: 200,
+    },
   
   // CurrentTrackCard styling
     container: {
@@ -26,13 +33,12 @@ const styles = StyleSheet.create({
       textTransform: 'uppercase',
       lineHeight: 22
     },
-
+    
     //Recent Page
     card: {
       flexDirection: 'row',
       flexWrap: 'wrap',
       marginTop: 5,
-      
     },
     cardText: {
       color: '#fff',

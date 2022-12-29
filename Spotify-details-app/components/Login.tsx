@@ -65,8 +65,10 @@ export function Login() {
       }
     }, [response])
     return (
-      <View>
-      <Button title='Login' onPress={()=>{promtAsync({useProxy:true})}}/>
+      <View style={styles.background}>
+        <View style={{flex: 1, justifyContent: 'center', width: '80%', marginLeft: '10%'}}>
+          <Button color="#1db954" title='Login' onPress={()=>{promtAsync({useProxy:true})}}/>
+        </View>
       </View>
     )
 }

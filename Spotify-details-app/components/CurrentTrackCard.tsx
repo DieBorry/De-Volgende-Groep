@@ -35,7 +35,7 @@ export function CurrentTrackCard() {
     return (
       <View style={styles.container}>
         {!currentSong || !currentArtist ?
-         <ActivityIndicator size={"large"} color="#00ff00"/>:
+         <ActivityIndicator size={"large"} color="#1db954"/>:
          <Pressable onPressIn={showDetails?()=>setShowDetails(false):()=>setShowDetails(true)}>
             {!showDetails? 
             <View>

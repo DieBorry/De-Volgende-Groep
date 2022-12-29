@@ -21,7 +21,7 @@ export default function App() {
         <Tab.Navigator 
           
           screenOptions= {{
-            tabBarActiveTintColor: '#00ff00',
+            tabBarActiveTintColor: '#1db954',
             tabBarActiveBackgroundColor: '#222',
             tabBarInactiveTintColor: '#fff',
             tabBarStyle: {
