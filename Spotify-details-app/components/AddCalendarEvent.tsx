@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { View, Text, Button, Platform } from "react-native";
-import * as Calendar from 'expo-calendar'
+import * as Calendar from 'expo-calendar';
 import styles from "./styles";
 
 
