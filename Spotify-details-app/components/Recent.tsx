@@ -30,7 +30,6 @@ export function Recent() {
     },[])
     return (
       <View style={styles.background}>
-        <Button title="Home" onPress={() => navigation.navigate("Home")}/>
         <ScrollView>
           <CurrentTrackCard/>
         {!trackList? <ActivityIndicator size={"large"} color="#00ff00"/>:

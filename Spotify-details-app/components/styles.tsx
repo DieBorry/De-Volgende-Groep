@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
   
   // CurrentTrackCard styling
     container: {
-      height: 350,
       alignItems: 'stretch',
       justifyContent: 'flex-start',
     },
@@ -23,7 +22,9 @@ const styles = StyleSheet.create({
     title: {
       backgroundColor: "#ffffff88",
       position: "absolute",
-      top: 170
+      top: 170,
+      textTransform: 'uppercase',
+      lineHeight: 22
     },
 
     //Recent Page
