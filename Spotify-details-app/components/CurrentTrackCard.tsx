@@ -2,8 +2,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import {View, Image, Text, ActivityIndicator, Pressable} from "react-native";
-import GetTrackDetails from "./GetTrackDetail";
 
+import AddCalendarEvent from "./AddCalendarEvent";
+import GetTrackDetails from "./GetTrackDetail";
 import styles from "./styles";
 
 
@@ -29,12 +30,13 @@ export function CurrentTrackCard() {
       let cTrackInterval = setInterval(getCurrentTrack,1500)
       return () => clearInterval(cTrackInterval)
     },[])
+    
   
     return (
       <View style={styles.container}>
         {!currentSong || !currentArtist ?
          <ActivityIndicator size={"large"} color="#00ff00"/>:
-         <Pressable onPressIn={()=>setShowDetails(true)}>
+         <Pressable onPressIn={showDetails?()=>setShowDetails(false):()=>setShowDetails(true)}>
             {!showDetails? 
             <View>
               <Image style={styles.albumCover} source={{uri:currentSong?.item.album.images[0].url}}/>
@@ -43,6 +45,7 @@ export function CurrentTrackCard() {
               <Text style={styles.text}>
                 Artist's Genres: {currentArtist?.genres.map((genre,index)=><Text key={index}>{genre}{'\n'}</Text> )}
               </Text>
+              <AddCalendarEvent songName={currentSong?.item.name} artistName={currentSong?.item.artists[0].name} duration={currentSong?.item.duration_ms} />
             </View>
             :
             <GetTrackDetails url={currentSong.item.href} />

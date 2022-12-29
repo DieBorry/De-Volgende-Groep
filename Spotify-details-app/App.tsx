@@ -8,8 +8,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 //component imports
 import Recent from './components/Recent';
-import Login from './components/Login';
 import Home from './components/Home';
+import Login from './components/Login';
 import styles from './components/styles';
 
 

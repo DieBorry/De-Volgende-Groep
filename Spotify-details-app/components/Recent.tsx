@@ -3,10 +3,9 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, ScrollView, View, Image, Text, ActivityIndicator, Pressable } from "react-native";
-
-import styles from "./styles";
 import {LinearGradient} from 'expo-linear-gradient';
 
+import styles from "./styles";
 import CurrentTrackCard from "./CurrentTrackCard";
 
 
